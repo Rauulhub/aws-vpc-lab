@@ -1,22 +1,18 @@
-variable "name_prefix" {
-  description = "Prefijo/nombre base para recursos"
+variable "ssh_key" {
+  description = "Provides custom public SSH key."
   type        = string
+  default     = ""
 }
 
-variable "aws_region" {
-  description = "AWS region to deploy resources"
+# opcionales (si quieres controlar la región o tipo de instancia)
+variable "region" {
+  description = "AWS region"
   type        = string
+  default     = "us-east-1"
 }
 
-variable "vpc_cidr" {
-  description = "CIDR block for the VPC"
+variable "instance_type" {
+  description = "EC2 instance type"
   type        = string
-}
-
-variable "public_subnets" {
-  description = "Map of public subnets with AZ and CIDR"
-  type = map(object({
-    az   = string
-    cidr = string
-  }))
+  default     = "t3.micro"
 }

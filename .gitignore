@@ -1,0 +1,10 @@
+# Terraform local state
+.terraform/
+.terraform.lock.hcl
+terraform.tfstate
+terraform.tfstate.backup
+crash.log
+
+# IDE / OS
+.vscode/
+.DS_Store

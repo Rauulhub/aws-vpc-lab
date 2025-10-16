@@ -6,8 +6,11 @@ resource "aws_s3_bucket" "cmtr_bucket" {
   }
 }
 
-# Asignamos el ACL con el nuevo recurso
-resource "aws_s3_bucket_acl" "cmtr_bucket_acl" {
-  bucket = aws_s3_bucket.cmtr_bucket.id
-  acl    = "private"
+# Bloquea el acceso público (mantiene bucket privado sin usar ACLs)
+resource "aws_s3_bucket_public_access_block" "cmtr_block" {
+  bucket                  = aws_s3_bucket.cmtr_bucket.id
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
 }

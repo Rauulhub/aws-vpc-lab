@@ -4,6 +4,6 @@ data "terraform_remote_state" "base_infra" {
   config = {
     bucket = var.state_bucket
     key    = var.state_key
-    region = var.aws_region
+    region = var.region
   }
 }

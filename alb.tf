@@ -200,7 +200,7 @@ resource "aws_launch_template" "green" {
 
 ### ---------- Auto Scaling Groups ----------
 resource "aws_autoscaling_group" "blue_asg" {
-  name                = "cmtr-d8cbjg27-blue-asg"
+  name                = "Blue Environment"
   desired_capacity    = var.desired_capacity
   max_size            = var.desired_capacity
   min_size            = var.desired_capacity
@@ -214,7 +214,7 @@ resource "aws_autoscaling_group" "blue_asg" {
 
   tag {
     key                 = "Name"
-    value               = "cmtr-d8cbjg27-blue-asg-instance"
+    value               = "Blue Environment"
     propagate_at_launch = true
   }
 
@@ -230,7 +230,7 @@ resource "aws_autoscaling_group" "blue_asg" {
 }
 
 resource "aws_autoscaling_group" "green_asg" {
-  name                = "cmtr-d8cbjg27-green-asg"
+  name                = "Green Environment"
   desired_capacity    = var.desired_capacity
   max_size            = var.desired_capacity
   min_size            = var.desired_capacity
@@ -244,7 +244,7 @@ resource "aws_autoscaling_group" "green_asg" {
 
   tag {
     key                 = "Name"
-    value               = "cmtr-d8cbjg27-green-asg-instance"
+    value               = "Green Environment"
     propagate_at_launch = true
   }
 

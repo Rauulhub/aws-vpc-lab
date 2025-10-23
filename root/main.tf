@@ -4,7 +4,7 @@ provider "aws" {
 
 
 module "network" {
-  source              = "../modules/network"
+  source              = "./modules/network"
   name_prefix         = var.name_prefix
   region              = var.region
   vpc_cidr            = var.vpc_cidr
@@ -13,14 +13,14 @@ module "network" {
 }
 
 module "network_security" {
-  source           = "../modules/network_security"
+  source           = "./modules/network_security"
   name_prefix      = var.name_prefix
   vpc_id           = module.network.vpc_id
   allowed_ip_range = var.allowed_ip_range
 }
 
 module "application" {
-  source             = "../modules/application"
+  source             = "./modules/application"
   name_prefix        = var.name_prefix
   vpc_id             = module.network.vpc_id
   subnet_ids         = module.network.public_subnet_ids

@@ -15,7 +15,7 @@ resource "aws_launch_template" "compute" {
     security_groups             = [var.ssh_sg_id, var.private_http_sg_id]
   }
 
-  user_data = file("${path.module}/user_data.tpl")
+  user_data = base64encode(file("${path.module}/user_data.tpl"))
 
   tag_specifications {
     resource_type = "instance"

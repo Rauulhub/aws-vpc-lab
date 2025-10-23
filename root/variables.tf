@@ -29,9 +29,9 @@ variable "public_subnet_cidrs" {
 }
 
 variable "allowed_ip_range" {
-  type        = string
+  type        = list(string)
   description = "IP range allowed to access the instances via SSH."
-  default     = "0.0.0.0/0"
+  default     = ["0.0.0.0/0"]
 }
 
 variable "ami_id" {

@@ -66,7 +66,7 @@ resource "aws_autoscaling_group" "asg" {
   vpc_zone_identifier = var.subnet_ids
   launch_template {
     id      = aws_launch_template.compute.id
-    version = "$$Latest"
+    version = "$Latest"
   }
   target_group_arns = [aws_lb_target_group.app_tg.arn]
 

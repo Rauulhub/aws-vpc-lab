@@ -6,15 +6,22 @@ resource "aws_vpc" "this" {
 }
 
 resource "aws_subnet" "public" {
-  for_each                = { for idx, cidr in var.public_subnet_cidrs : idx => cidr }
+  for_each = {
+    a = var.public_subnet_cidrs[0]
+    b = var.public_subnet_cidrs[1]
+    c = var.public_subnet_cidrs[2]
+  }
+
   vpc_id                  = aws_vpc.this.id
   cidr_block              = each.value
-  availability_zone       = var.azs[tonumber(each.key)]
+  availability_zone       = var.azs[lookup({ a = 0, b = 1, c = 2 }, each.key)]
   map_public_ip_on_launch = true
+
   tags = {
     Name = "${var.name_prefix}-subnet-public-${each.key}"
   }
 }
+
 
 resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.this.id

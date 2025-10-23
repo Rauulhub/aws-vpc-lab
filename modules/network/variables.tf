@@ -19,6 +19,6 @@ variable "azs" {
 }
 
 variable "public_subnet_cidrs" {
-  type = list(string)
+  type    = list(string)
   default = ["10.10.1.0/24", "10.10.3.0/24", "10.10.5.0/24"]
 }

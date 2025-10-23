@@ -6,10 +6,10 @@ resource "aws_vpc" "this" {
 }
 
 resource "aws_subnet" "public" {
-  for_each = { for idx, cidr in var.public_subnet_cidrs : idx => cidr }
-  vpc_id            = aws_vpc.this.id
-  cidr_block        = each.value
-  availability_zone = var.azs[tonumber(each.key)]
+  for_each                = { for idx, cidr in var.public_subnet_cidrs : idx => cidr }
+  vpc_id                  = aws_vpc.this.id
+  cidr_block              = each.value
+  availability_zone       = var.azs[tonumber(each.key)]
   map_public_ip_on_launch = true
   tags = {
     Name = "${var.name_prefix}-subnet-public-${each.key}"
@@ -18,12 +18,12 @@ resource "aws_subnet" "public" {
 
 resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.this.id
-  tags = { Name = "${var.name_prefix}-igw" }
+  tags   = { Name = "${var.name_prefix}-igw" }
 }
 
 resource "aws_route_table" "public_rt" {
   vpc_id = aws_vpc.this.id
-  tags = { Name = "${var.name_prefix}-rt" }
+  tags   = { Name = "${var.name_prefix}-rt" }
 }
 
 resource "aws_route" "default_route" {
@@ -33,7 +33,7 @@ resource "aws_route" "default_route" {
 }
 
 resource "aws_route_table_association" "public_assoc" {
-  for_each = aws_subnet.public
+  for_each       = aws_subnet.public
   subnet_id      = each.value.id
   route_table_id = aws_route_table.public_rt.id
 }
